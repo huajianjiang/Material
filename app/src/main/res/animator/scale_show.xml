@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:ordering="together"
+     android:duration="@android:integer/config_shortAnimTime"
+     tools:targetApi="honeycomb">
+
+    <objectAnimator
+        android:propertyName="scaleX"
+        android:valueTo="1.0"
+        tools:targetApi="honeycomb"/>
+
+    <objectAnimator
+        android:propertyName="scaleY"
+        android:valueTo="1.0"
+        tools:targetApi="honeycomb"/>
+
+</set>

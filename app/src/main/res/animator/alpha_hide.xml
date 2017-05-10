@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:tools="http://schemas.android.com/tools"
+     xmlns:android="http://schemas.android.com/apk/res/android">
+<objectAnimator android:propertyName="alpha"
+                android:valueTo="0"
+                tools:targetApi="honeycomb"
+                android:duration="@android:integer/config_shortAnimTime"/>
+</set>

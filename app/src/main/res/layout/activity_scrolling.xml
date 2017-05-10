@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
+    tools:context="com.jhj.demo.material.ScrollingActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:collapsedTitleTextAppearance="@style/AppTheme.TextAppearance.Design.CollapsingToolbar.Collapsed"
+            app:contentScrim="?attr/colorPrimary"
+            android:background="@color/colorAccent"
+            app:expandedTitleGravity="top|start"
+            app:expandedTitleMarginBottom="16dp"
+            app:expandedTitleMarginEnd="16dp"
+            app:expandedTitleMarginStart="16dp"
+            app:expandedTitleMarginTop="0dp"
+            app:expandedTitleTextAppearance="@style/AppTheme.TextAppearance.Design.CollapsingToolbar.Expanded"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:toolbarId="@+id/toolbar">
+
+            <!--android:background="@color/colorAccent"-->
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            <!--android:background="?attr/colorPrimary"-->
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_scrolling"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end"
+        app:srcCompat="@android:drawable/ic_dialog_email"
+        android:visibility="gone"/>
+
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_anchor="@id/app_bar"-->
+        <!--app:layout_anchorGravity="start|bottom"-->
+        <!--app:srcCompat="@drawable/ic_signal_wifi_3_bar_black_24dp"/>-->
+
+    <!--<android.support.v7.widget.AppCompatImageView-->
+        <!--android:id="@+id/image"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="32dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginRight="32dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--app:collapsingToolbarLayoutId="@id/toolbar_layout"-->
+        <!--app:layout_behavior="com.jhj.demo.material.behavoir.CommonBehavior"-->
+        <!--app:layout_collapseRangeGravity="left|top"-->
+        <!--app:srcCompat="@drawable/ic_launcher"-->
+        <!--tools:ignore="RtlHardcoded"/>-->
+
+    <LinearLayout
+        android:id="@+id/common_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        app:collapsingToolbarLayoutId="@id/toolbar_layout"
+        app:layout_toEndOf="@+id/wifi"
+        app:layout_behavior="com.jhj.demo.material.behavoir.CommonBehavior"
+        app:layout_collapseRangeGravity="left|top"
+        tools:ignore="RtlHardcoded"
+        tools:targetApi="honeycomb">
+
+        <!--app:showAnimation="@animator/translation_show"-->
+        <!--app:hideAnimation="@animator/translation_hide"-->
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/mac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="MAC 地址: ac:f7:f3:43:54:ac"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IP 地址: 196.168.1.3"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
