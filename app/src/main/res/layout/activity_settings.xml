@@ -1,14 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:textSize="24sp"
-        android:text="AAAAAAAA"
-        android:layout_margin="32dp"/>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.jhj.demo.material.TextViewx
+            android:id="@+id/tvx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:background="@drawable/bg_tv"
+            android:drawableBottom="@drawable/ic_android_black_24dp"
+            android:drawableEnd="@drawable/ic_android_black_24dp"
+            android:drawablePadding="16dp"
+            android:drawableRight="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/ic_launcher"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="AA"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"/>
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvx"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/ic_android_black_24dp"/>
+
+        <com.jhj.demo.material.SimpleSearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv"
+            android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_search"
+            android:drawableEnd="@drawable/ic_cancel_black_24dp"
+            android:drawableRight="@drawable/ic_cancel_black_24dp"
+            android:hint="@string/app_name"
+            android:paddingBottom="6dp"
+            android:paddingEnd="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="6dp"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:drawableLeft="@drawable/ic_search_black_24dp"/>
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchView"
+            android:layout_margin="32dp"
+            android:background="@drawable/bg_tv"
+            android:drawableBottom="@drawable/ic_android_black_24dp"
+            android:drawableEnd="@drawable/ic_android_black_24dp"
+            android:drawablePadding="16dp"
+            android:drawableRight="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/ic_launcher"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="AA"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"
+            />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

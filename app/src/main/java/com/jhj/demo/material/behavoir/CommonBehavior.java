@@ -441,4 +441,4 @@ public class CommonBehavior extends CoordinatorLayout.Behavior<View> {
         }
     }
 
-                                                                                                                       }
+}
