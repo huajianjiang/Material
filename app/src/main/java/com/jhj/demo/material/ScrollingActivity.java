@@ -7,19 +7,28 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
-import com.github.huajianjiang.expandablerecyclerview.util.Logger;
+import com.jhj.demo.material.test.MyListAdapter;
+import com.jhj.demo.material.util.Logger;
 import com.jhj.demo.material.util.Utils;
+
+import java.util.List;
 
 public class ScrollingActivity extends AppCompatActivity {
     private static final String TAG = ScrollingActivity.class.getSimpleName();
+
+    private ListView mListView;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +46,8 @@ public class ScrollingActivity extends AppCompatActivity {
         });
 
 
-        final View image = findViewById(R.id.image);
+        final CoordinatorLayout coordinatorLayout =
+                (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
         final AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -58,7 +68,6 @@ public class ScrollingActivity extends AppCompatActivity {
                       getResources().getDimensionPixelSize(R.dimen.app_bar_height));
 
 
-
         appBarLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -72,18 +81,35 @@ public class ScrollingActivity extends AppCompatActivity {
 //        params.setMargins(Utils.dp2px(this, 32),
 //                          statusBarHeight + actionBarHeight + Utils.dp2px(this, 16), 0, 0);
 
-        final CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(
-                R.id.toolbar_layout);
-//        toolbarLayout.setExpandedTitleMargin(
+        final View behaviorView = findViewById(R.id.common_layout);
+
+        final CollapsingToolbarLayout toolbarLayout =
+                (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+
+        //        toolbarLayout.setExpandedTitleMargin(
 //                Utils.dp2px(ScrollingActivity.this, 64),
 //                actionBarHeight + Utils.dp2px(ScrollingActivity.this, 16), 0, 0);
         toolbarLayout.post(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void run() {
-                Logger.e(TAG, "toolbarLayout_Height=" + toolbarLayout.getHeight()+",minHeight="+toolbarLayout.getMinimumHeight());
+                Logger.e(TAG, "toolbarLayout_Height=" + toolbarLayout.getHeight() + ",minHeight=" +
+                              toolbarLayout.getMinimumHeight());
+                ViewGroup.LayoutParams lp = toolbarLayout.getLayoutParams();
+                ViewGroup.MarginLayoutParams blp =
+                        (ViewGroup.MarginLayoutParams) behaviorView.getLayoutParams();
+                lp.height = behaviorView.getHeight() + actionBarHeight + statusBarHeight +
+                            blp.topMargin + blp.bottomMargin;
+                toolbarLayout.setLayoutParams(lp);
             }
         });
+
+        NestedScrollView nestedView = (NestedScrollView) findViewById(R.id.nestedScrollView);
+        nestedView.setNestedScrollingEnabled(true);
+
+        mListView = (ListView) findViewById(R.id.listView);
+        MyListAdapter adapter = new MyListAdapter(getApplicationContext());
+        mListView.setAdapter(adapter);
 
     }
 

@@ -19,8 +19,8 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 
-import com.github.huajianjiang.expandablerecyclerview.util.Logger;
 import com.jhj.demo.material.R;
+import com.jhj.demo.material.util.Logger;
 
 import java.util.List;
 
@@ -122,9 +122,9 @@ public class CommonBehavior extends CoordinatorLayout.Behavior<View> {
         boolean handled = false;
 
         AppBarLayout appBar = (AppBarLayout) dependency;
-//        Logger.e(TAG,
-//                "onDependentViewChanged===>" + appBar.getLeft() + "," + appBar.getTop() + "," +
-//                appBar.getRight() + "," + appBar.getBottom());
+        Logger.e(TAG,
+                 "onDependentViewChanged===>" + appBar.getLeft() + "," + appBar.getTop() + "," +
+                 appBar.getRight() + "," + appBar.getBottom());
 
         checkAnim(appBar, child);
 
@@ -141,6 +141,7 @@ public class CommonBehavior extends CoordinatorLayout.Behavior<View> {
                                    (float) (appBar.getHeight() - childVisibleHeightTrigger);
 
             float alpha = 1 - (fraction < 0 ? 0 : fraction > 1 ? 1 : fraction);
+
             Logger.e(TAG, "alphaFraction=" + fraction + ",Height-TriggerAnimHeight=" +
                           (appBar.getHeight() - childVisibleHeightTrigger) + ",top=" +
                           appBar.getTop());
@@ -156,11 +157,15 @@ public class CommonBehavior extends CoordinatorLayout.Behavior<View> {
             //透明度过渡
             child.setAlpha(alpha);
 
+            Logger.e(TAG, "onDependentViewChanged>>>>>>>" + child.getTag() + "\n" +
+                          mCurrentChildBounds.toShortString());
+
             child.layout(mCurrentChildBounds.left, mCurrentChildBounds.top,
-                    mCurrentChildBounds.right, mCurrentChildBounds.bottom);
+                         mCurrentChildBounds.right, mCurrentChildBounds.bottom);
 
             handled = true;
         }
+
         return handled;
     }
 
@@ -222,7 +227,7 @@ public class CommonBehavior extends CoordinatorLayout.Behavior<View> {
 
     @Override
     public boolean onLayoutChild(CoordinatorLayout parent, View child, int layoutDirection) {
-        Logger.i(TAG, "*********onLayoutChild*********");
+        Logger.i(TAG, "*********onLayoutChild*********>>>>>>>>>>>" + child.getTag());
 
         if (child.getVisibility() == View.VISIBLE && !mIsAnimating && !mHasLayout) {
 
@@ -243,21 +248,20 @@ public class CommonBehavior extends CoordinatorLayout.Behavior<View> {
                 final int collapseRange = appBar.getTotalScrollRange();
                 Logger.i(TAG, "collapseRange=" + collapseRange);
 
-                mExpandedCollapseBounds
-                        .set(appBar.getLeft(), appBar.getBottom() - appBar.getTop() - collapseRange,
-                                appBar.getRight(), appBar.getBottom());
+                mExpandedCollapseBounds.set(appBar.getLeft(),
+                                            appBar.getBottom() - appBar.getTop() - collapseRange,
+                                            appBar.getRight(), appBar.getBottom());
 
                 CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) child
                         .getLayoutParams();
                 //约束后的可布置 child 的相对区域
                 Rect constrainedRect = new Rect(mExpandedCollapseBounds);
-                final boolean changed = constrainedRect
-                        .intersect(mExpandedCollapseBounds.left + appBar.getPaddingLeft() +
-                                   lp.leftMargin, mExpandedCollapseBounds.top + lp.topMargin,
-                                mExpandedCollapseBounds.right - appBar.getPaddingRight() -
-                                lp.rightMargin,
-                                mExpandedCollapseBounds.bottom - appBar.getPaddingBottom() -
-                                lp.bottomMargin);
+                final boolean changed = constrainedRect.intersect(
+                        mExpandedCollapseBounds.left + appBar.getPaddingLeft() + lp.leftMargin,
+                        mExpandedCollapseBounds.top + lp.topMargin,
+                        mExpandedCollapseBounds.right - appBar.getPaddingRight() - lp.rightMargin,
+                        mExpandedCollapseBounds.bottom - appBar.getPaddingBottom() -
+                        lp.bottomMargin);
 
                 //计算 child 布局边界
                 GravityCompat.apply(mCollapseRangeGravity, child.getMeasuredWidth(),
@@ -265,14 +269,13 @@ public class CommonBehavior extends CoordinatorLayout.Behavior<View> {
                         ViewCompat.getLayoutDirection(parent));
 
                 child.layout(mExpandedChildBounds.left, mExpandedChildBounds.top,
-                        mExpandedChildBounds.right, mExpandedChildBounds.bottom);
+                             mExpandedChildBounds.right, mExpandedChildBounds.bottom);
 
                 mHasLayout = true;
 
                 Logger.i(TAG,
-                        "onLayoutChild>>>>>>>>>>>>>>" + mExpandedCollapseBounds.toShortString() +
-                        "," +
-                        mExpandedChildBounds.toShortString());
+                         "onLayoutChild>>>>>>>>>>>>>>" + mExpandedCollapseBounds.toShortString() +
+                         "," + mExpandedChildBounds.toShortString());
             }
 
             setupExpandedTitleMargin(parent, child);
@@ -290,9 +293,9 @@ public class CommonBehavior extends CoordinatorLayout.Behavior<View> {
             final int expandedTitleMarginLeft;
             if (mToEndOfView != null) {
                 Logger.e(TAG, "ToEndOfView.getLeft()=" + mToEndOfView.getLeft());
-                expandedTitleMarginLeft =
-                        mExpandedChildBounds.left + mToEndOfView.getLeft() + mToEndOfView.getMeasuredWidth() +
-                        mCollapsingToolbarLayout.getExpandedTitleMarginStart();
+                expandedTitleMarginLeft = mExpandedChildBounds.left + mToEndOfView.getLeft() +
+                                          mToEndOfView.getMeasuredWidth() +
+                                          mCollapsingToolbarLayout.getExpandedTitleMarginStart();
             } else {
                 expandedTitleMarginLeft = mExpandedChildBounds.left + mExpandedChildBounds.width() +
                                           mCollapsingToolbarLayout.getExpandedTitleMarginStart();
@@ -301,11 +304,13 @@ public class CommonBehavior extends CoordinatorLayout.Behavior<View> {
             final int expandedTitleMarginTop =
                     ViewCompat.getMinimumHeight(mCollapsingToolbarLayout) +
                     mCollapsingToolbarLayout.getExpandedTitleMarginTop();
+
             Logger.e(TAG, "expandedTitleMarginTop=====>" + expandedTitleMarginTop);
-            mCollapsingToolbarLayout
-                    .setExpandedTitleMargin(expandedTitleMarginLeft, expandedTitleMarginTop,
-                            mCollapsingToolbarLayout.getExpandedTitleMarginEnd(),
-                            mCollapsingToolbarLayout.getExpandedTitleMarginBottom());
+
+            mCollapsingToolbarLayout.setExpandedTitleMargin(expandedTitleMarginLeft,
+                                                            expandedTitleMarginTop,
+                                                            mCollapsingToolbarLayout.getExpandedTitleMarginEnd(),
+                                                            mCollapsingToolbarLayout.getExpandedTitleMarginBottom());
             mHasSetExpandedTitleMargin = true;
         }
     }

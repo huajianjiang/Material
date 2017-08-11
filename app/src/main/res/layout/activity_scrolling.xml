@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
+    android:id="@+id/coordinatorLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +13,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -20,15 +21,15 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:background="@color/colorAccent"
             android:fitsSystemWindows="true"
             app:collapsedTitleTextAppearance="@style/AppTheme.TextAppearance.Design.CollapsingToolbar.Collapsed"
             app:contentScrim="?attr/colorPrimary"
-            android:background="@color/colorAccent"
             app:expandedTitleGravity="top|start"
             app:expandedTitleMarginBottom="16dp"
             app:expandedTitleMarginEnd="16dp"
-            app:expandedTitleMarginStart="16dp"
+            app:expandedTitleMarginStart="8dp"
             app:expandedTitleMarginTop="0dp"
             app:expandedTitleTextAppearance="@style/AppTheme.TextAppearance.Design.CollapsingToolbar.Expanded"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
@@ -41,7 +42,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            </android.support.v7.widget.Toolbar>
             <!--android:background="?attr/colorPrimary"-->
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -55,55 +58,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="visible"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email"
-        android:visibility="gone"/>
+        app:srcCompat="@android:drawable/ic_dialog_email"/>
 
     <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_anchor="@id/app_bar"-->
-        <!--app:layout_anchorGravity="start|bottom"-->
-        <!--app:srcCompat="@drawable/ic_signal_wifi_3_bar_black_24dp"/>-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:layout_anchor="@id/app_bar"-->
+    <!--app:layout_anchorGravity="start|bottom"-->
+    <!--app:srcCompat="@drawable/ic_signal_wifi_3_bar_black_24dp"/>-->
 
     <!--<android.support.v7.widget.AppCompatImageView-->
-        <!--android:id="@+id/image"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginRight="32dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--app:collapsingToolbarLayoutId="@id/toolbar_layout"-->
-        <!--app:layout_behavior="com.jhj.demo.material.behavoir.CommonBehavior"-->
-        <!--app:layout_collapseRangeGravity="left|top"-->
-        <!--app:srcCompat="@drawable/ic_launcher"-->
-        <!--tools:ignore="RtlHardcoded"/>-->
+    <!--android:id="@+id/image"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginLeft="32dp"-->
+    <!--android:layout_marginTop="16dp"-->
+    <!--android:layout_marginRight="32dp"-->
+    <!--android:layout_marginBottom="16dp"-->
+    <!--app:collapsingToolbarLayoutId="@id/toolbar_layout"-->
+    <!--app:layout_behavior="com.jhj.demo.material.behavoir.CommonBehavior"-->
+    <!--app:layout_collapseRangeGravity="left|top"-->
+    <!--app:srcCompat="@drawable/ic_launcher"-->
+    <!--tools:ignore="RtlHardcoded"/>-->
 
     <LinearLayout
         android:id="@+id/common_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="0dp"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
         app:collapsingToolbarLayoutId="@id/toolbar_layout"
-        app:layout_toEndOf="@+id/wifi"
         app:layout_behavior="com.jhj.demo.material.behavoir.CommonBehavior"
         app:layout_collapseRangeGravity="left|top"
+        app:layout_toEndOf="@+id/wifi"
         tools:ignore="RtlHardcoded"
-        tools:targetApi="honeycomb">
+        tools:targetApi="honeycomb"
+        android:tag="@string/app_name"
+        android:visibility="visible">
 
         <!--app:showAnimation="@animator/translation_show"-->
         <!--app:hideAnimation="@animator/translation_hide"-->
 
-        <android.support.v7.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/wifi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,5 +130,13 @@
             android:textSize="14sp"/>
 
     </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/wifi2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_launcher"
+        android:layout_gravity="center"/>
 
 </android.support.design.widget.CoordinatorLayout>
