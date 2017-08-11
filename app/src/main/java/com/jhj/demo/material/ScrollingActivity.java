@@ -11,6 +11,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -36,6 +37,8 @@ public class ScrollingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scrolling);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        toolbar.setSubtitle(R.string.app_name);
+
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +88,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
         final CollapsingToolbarLayout toolbarLayout =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        toolbarLayout.setTitle("Android");
 
         //        toolbarLayout.setExpandedTitleMargin(
 //                Utils.dp2px(ScrollingActivity.this, 64),
@@ -111,6 +115,14 @@ public class ScrollingActivity extends AppCompatActivity {
         MyListAdapter adapter = new MyListAdapter(getApplicationContext());
         mListView.setAdapter(adapter);
 
+    }
+
+    private void setDrawerAction() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar == null) return;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
